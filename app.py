@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
@@ -11,8 +11,12 @@ def index():
 def addComment():
 	return render_template("addComment.html")
 
-@app.route("/show/comments")
+@app.route("/show/comments", methods=('GET', 'POST'))
 def showComments():
+	if request.method == 'POST':
+		 email = request.form['email']
+		 content = request.form['comment']
+		 print(email)
 	return render_template("showComments.html")
 
 @app.route("/about")
