@@ -94,12 +94,17 @@
       </div>
     </nav>
 
+    <br/>
+<br/>
+<hr/>
+<br/>
+<br/>
     <section class="bg-white dark:bg-gray-900">
       <div class="grid max-w-screen-xl mx-auto">
         <p
           class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
         >
-          List of comments retrieve from DB
+          List of comments retrieve from Memory
         </p>
 
         <div class="overflow-x-auto">
@@ -123,6 +128,45 @@
                    </tr>  
                     {%endfor%}
                 </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+<br/>
+<br/>
+<hr/>
+<br/>
+<br/>
+    <section class="bg-white dark:bg-gray-900">
+      <div class="grid max-w-screen-xl mx-auto">
+        <p
+          class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+        >
+          List of comments retrieve from DB
+        </p>
+
+        <div class="overflow-x-auto">
+          <table
+            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left">Email</th>
+                <th scope="col" class="px-6 py-3 text-left">Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+                <!-- <tr> 
+                    {% for filedData in userFilledData %}
+                    <tr class="text-left bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{filedData[0]}} </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{filedData[1]}} </th>
+                   </tr>  
+                    {%endfor%}
+                </tr> -->
             </tbody>
           </table>
         </div>
