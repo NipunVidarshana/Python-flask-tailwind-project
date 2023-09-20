@@ -7,5 +7,25 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html")
 
+@app.route("/add/comment")
+def addComment():
+	return render_template("addComment.html")
+
+@app.route("/show/comments")
+def showComments():
+	return render_template("showComments.html")
+
+@app.route("/about")
+def about():
+	return render_template("about.html")
+
+@app.route("/services")
+def services():
+	return render_template("services.html")
+
+@app.route("/contact")
+def comments():
+	return render_template("contacts.html")
+
 if __name__ == '__main__':
 	app.run(debug=True)
