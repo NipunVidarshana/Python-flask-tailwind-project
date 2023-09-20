@@ -2,6 +2,11 @@ from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
+if __name__ == '__main__':
+	app.run(debug=True)
+
+myComments = [] #define array for store comments on the Memory
+
 @app.route("/")
 @app.route("/index")
 def index():
@@ -11,13 +16,22 @@ def index():
 def addComment():
 	return render_template("addComment.html")
 
-@app.route("/show/comments", methods=('GET', 'POST'))
+@app.route("/show/comments", methods=['GET', 'POST'])
 def showComments():
 	if request.method == 'POST':
-		 email = request.form['email']
-		 content = request.form['comment']
-		 print(email)
-	return render_template("showComments.html")
+		#print(request.form)
+		userEmail = request.form['email']#get values from form
+		userContent = request.form['comment']#get values from form
+		userStoreOnDB = request.form['storeDB']#get values from form
+		userStoreOnMemory = request.form['storeMemory']#get values from form
+
+		if userStoreOnMemory == True:
+			myComments.append((userEmail,userContent)) #Assiged values to myComments array. Store data until re run the application(Tempory)
+
+		if userStoreOnDB == True:
+			print("stored on db") #Assiged values store on the DB permenetly
+
+	return render_template("showComments.html" ,userFilledData = myComments)
 
 @app.route("/about")
 def about():
@@ -31,5 +45,3 @@ def services():
 def comments():
 	return render_template("contacts.html")
 
-if __name__ == '__main__':
-	app.run(debug=True)
