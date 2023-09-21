@@ -1,7 +1,11 @@
-from flask import Flask, render_template,request,redirect,url_for,session
+from flask import Flask, render_template,request,redirect,url_for,session,flash
+from datetime import timedelta #this import is use for store session values for specific time
 
 app = Flask(__name__)
 app.secret_key = "qweac@2017"
+#app.permanent_session_lifetime = timedelta(days=5)#session store upto 5 days
+app.permanent_session_lifetime = timedelta(minutes=1)#session store upto 5 minutes
+
 
 myComments = [] #define array for store comments on the Memory
 
@@ -46,6 +50,8 @@ def comments():
 	return render_template("contacts.html")
 
 
+
+#session management related activities
 @app.route("/add/session/variable")
 def addSession():
 	return render_template("addSession.html")
@@ -53,6 +59,7 @@ def addSession():
 @app.route("/add/session", methods=['POST'])
 def addSessionPostMethod():
 	sessionStoreParam = request.form['sessionStoreParam']#get values from form
+	session.permanent = True
 	session["userParam"] =  sessionStoreParam #Store in the session storage.When browser close all data vanished from the session.
 	return redirect(url_for("checkSession"))
 
@@ -62,7 +69,13 @@ def checkSession():
 		userParam = session["userParam"] #get data form session. Access by the variable.
 		return "<p>Session stored successfully. Stored parameter is below</p><h1>" + userParam +"</h1>"
 	else:
-		return "<p>Session parameter not stored or web browser closed and reopened.</p>"
+		return "<p>Session parameter not stored,cleared or web browser closed and reopened.</p>"
+
+@app.route("/clear/session")
+def clearSession():
+	session.pop("userParam", None)#clear session storage	
+	return redirect(url_for("checkSession"))	
+#end of session management related activities
 
 
 
